@@ -50,7 +50,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
                 {/* LOGO */}
                 <Link href="/" className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-blue-400 shadow-lg">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-linear-to-br from-blue-600 to-blue-400 shadow-lg">
                         <span className="text-xl font-bold text-white">H</span>
                     </div>
 
@@ -90,7 +90,7 @@ const Navbar = () => {
                                     </>
                                     :
                                     <Link href="/auth/signin" >
-                                        <Button className="text-sm font-medium bg-gradient-to-br from-blue-600 to-blue-400 transition hover:text-violet-300">
+                                        <Button className="text-sm font-medium bg-linear-to-br from-blue-600 to-blue-400 transition hover:text-violet-300">
                                             Sign In
                                         </Button>
                                     </Link>
@@ -148,7 +148,7 @@ const Navbar = () => {
                                             href="/auth/signin"
                                             onClick={() => setIsMenuOpen(false)}
                                         >
-                                            <Button className="text-sm font-medium bg-gradient-to-br from-blue-600 to-blue-400 transition hover:text-violet-300">
+                                            <Button className="text-sm font-medium bg-linear-to-br from-blue-600 to-blue-400 transition hover:text-violet-300">
                                                 Sign In
                                             </Button>
                                         </Link>

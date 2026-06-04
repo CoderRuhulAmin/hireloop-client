@@ -50,7 +50,7 @@ const StatsSection = () => {
             <div className="absolute inset-0 bg-black/40" />
 
             {/* Glow Effect */}
-            <div className="absolute left-1/2 top-[25%] h-100 w-100 -translate-x-1/2 rounded-full bg-violet-600/30 blur-[140px]" />
+            <div className="absolute left-1/2 top-[25%] h-100 w-1    00 -translate-x-1/2 rounded-full bg-violet-600/30 blur-[140px]" />
 
             {/* Contents */}
             <div className="relative z-10 container mx-auto text-center">

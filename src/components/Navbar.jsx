@@ -60,6 +60,7 @@ const Navbar = () => {
                             alt="Hire Loop"
                             width={120}
                             height={60}
+                            className="h-auto w-auto"
                         />
                     </div>
                 </Link>

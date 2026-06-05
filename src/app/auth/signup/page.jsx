@@ -1,17 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { Card, Button, Link, TextField, Label, InputGroup, Input, FieldError } from "@heroui/react";
+import { Card, Button, Link, TextField, Label, InputGroup, Input, FieldError, Separator } from "@heroui/react";
 import { Eye, EyeSlash, Person, At, ShieldKeyhole } from "@gravity-ui/icons";
-// import { signUp } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import { authClient, signUp } from "@/lib/auth-client";
+import RoleSelection from "../components/RoleSelection";
+
 
 const signUpPage = () => {
     // Form fields
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // console.log("Signup form state:", { name, email, password });
-    
+    const [role, setRole] = useState("seeker");
+    // console.log("Signup form state:", { name, email, password, role });
+
     // UI States
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +26,12 @@ const signUpPage = () => {
     const toggleVisibility = () => setIsVisible(!isVisible);
 
 
+    const handleGoogleLogin = async () => {
+        //
+    }
+    const handleGithubLogin = async () => {
+        //
+    }
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -29,47 +40,80 @@ const signUpPage = () => {
         setSuccess("");
         setIsLoading(true);
 
-        try{
-            console.log("Signup form state:", { name, email, password });
-            // const { data, error: authError } = await signUp.email({
-            //     email,
-            //     password,
-            //     name,
-            //     callbackURL: "/",
-            // });
+        try {
+            const { data, error: authError } = await signUp.email({
+                name,
+                email,
+                password,
+                role,
+                callbackURL: "/",
+            });
 
-            // console.log("Signup response:", { data, authError });
+            console.log("Signup response:", { data, authError });
 
-            // if (authError) {
-            //     setError(authError.message || "Something went wrong during signup.");
-            // } else {
-            //     setSuccess("Account created successfully! Welcome.");
-            //     setName("");
-            //     setEmail("");
-            //     setPassword("");
-            // }
+            if (authError) {
+                setError(authError.message || "Something went wrong during signup.");
+            } else {
+                setSuccess("Account created successfully! Welcome.");
+                setName("");
+                setEmail("");
+                setPassword("");
+            }
 
         } catch (err) {
-            setError("An unexpected network error occurred.");
+            console.error(err);
+            setError(err?.message || "An unexpected network error occurred.");
         } finally {
             setIsLoading(false);
         }
     }
     return (
-        <main className='min-h-screen'>
-            <section className='py-12'>
-                <div className="flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 px-4">
-                    <Card className="w-full max-w-md p-6 shadow-sm border border-zinc-200 dark:border-zinc-800">
-
+        <main className='min-h-screen bg-linear-to-b from-zinc-200 via-zinc-100 to-zinc-200 dark:from-zinc-950 dark:via-zinc-950 dark:to-black'>
+            <section className="py-12">
+                <div className="flex items-center justify-center px-4">
+                    <Card className="w-full max-w-md p-8 shadow-xl border border-zinc-200/80 dark:border-zinc-800 backdrop-blur-sm">
                         {/* Header Container */}
                         <div className="flex flex-col items-center justify-center gap-1 pb-6 border-b border-zinc-100 dark:border-zinc-800 mb-6 text-center">
                             <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">Create an account</h1>
                             <p className="text-sm text-zinc-600 dark:text-zinc-400">Fill in the fields below to get started</p>
                         </div>
 
+                        <div className="flex flex-col gap-4 w-full">
+                            <Button
+                                onClick={handleGoogleLogin}
+                                className="w-full"
+                                variant="tertiary"
+                            >
+                                <FcGoogle />
+                                <span className="tracking-wider text-zinc-700">
+                                    Continue with Google
+                                </span>
+
+                            </Button>
+
+                            <Button
+                                onClick={handleGithubLogin}
+                                className="w-full"
+                                variant="tertiary"
+                            >
+                                <FaGithub />
+                                <span className="tracking-wider text-zinc-700">
+                                    Continue with GitHub
+                                </span>
+                            </Button>
+                        </div>
+
+                        <div className="flex items-center gap-4 my-6">
+                            <Separator className="flex-1" />
+                            <span className="bg-white dark:bg-zinc-950 px-3 text-xs uppercase tracking-wider text-zinc-600">
+                                OR
+                            </span>
+                            <Separator className="flex-1" />
+                        </div>
+
                         {/* Form Body */}
-                        <form 
-                            onSubmit={handleSignup} 
+                        <form
+                            onSubmit={handleSignup}
                             className="flex flex-col gap-5"
                         >
 
@@ -124,6 +168,9 @@ const signUpPage = () => {
                                     </button>
                                 </InputGroup>
                             </TextField>
+
+                            {/* Role Selection */}
+                            <RoleSelection setRole = {setRole} />
 
                             {/* Dynamic Status Badges */}
                             {error && (

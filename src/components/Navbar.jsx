@@ -6,19 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Bars, Xmark } from '@gravity-ui/icons';
+import { signOut, useSession } from "@/lib/auth-client";
 
 const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const {data: session, isPending} = useSession();
+    const {data: session, isPending} = useSession();
     // console.log({session, isPending});
-    // const user = session?.user;
+    const user = session?.user;
     // console.log({user});
 
-    const user = {
-        name: "Ruhul Amin",
-    }
-    // const user = ""
 
     const handleSignOut = async () => {
         await signOut({ callbackUrl: "/" });

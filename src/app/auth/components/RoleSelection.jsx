@@ -14,12 +14,12 @@ const RoleSelection = ({setRole}) => {
                         <Description>To find new job</Description>
                     </Radio.Content>
                 </Radio>
-                <Radio value="requiter">
+                <Radio value="recruiter">
                     <Radio.Control>
                         <Radio.Indicator />
                     </Radio.Control>
                     <Radio.Content>
-                        <Label>Requiter</Label>
+                        <Label>Recruiter</Label>
                         <Description>To provide job</Description>
                     </Radio.Content>
                 </Radio>

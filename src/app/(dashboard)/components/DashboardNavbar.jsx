@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Bars, Xmark } from '@gravity-ui/icons';
 import { signOut, useSession } from "@/lib/auth-client";
-import MainLogo from "./MainLogo";
 
-const Navbar = () => {
+const DashboardNavbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {data: session, isPending} = useSession();
@@ -41,13 +39,10 @@ const Navbar = () => {
             ))
         }
     </>
-
     return (
         <nav className="navbar">
             <div className="flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-                {/* LOGO */}
-                <MainLogo />
-
+                <div></div>
                 {/* RIGHT SIDE */}
                 <div className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5">
                     {/* Desktop Menu */}
@@ -156,4 +151,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default DashboardNavbar;
